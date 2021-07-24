@@ -4,7 +4,7 @@ import './polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-require('dotenv').config();
+// require('dotenv').config();
 // import * as serviceWorker from './serviceWorker';
 
 // import { icons } from './assets/icons'
