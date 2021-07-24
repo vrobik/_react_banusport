@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/_react_banusport/precache-manifest.a9f6f97f5a6e52e624eee1da6b39b6eb.js"
+  "/_react_banusport/precache-manifest.4369712e6eae9d96438ad48f0747a0c4.js"
 );
 
 self.addEventListener('message', (event) => {
