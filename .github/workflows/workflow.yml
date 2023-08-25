@@ -20,6 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: Node 14
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
       - name: Check Node Version
         run: node -v && npm -v
 
