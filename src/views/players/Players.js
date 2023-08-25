@@ -359,19 +359,16 @@ const Players = () => {
         <CCard>
           <CCardHeader>
             <CRow className="align-items-center">
-              <CCol col="6" xl="4" className="mb-3 mb-xl-0">
-                Players
-              </CCol>
-              <CCol col="6" sm="4" md="4" xl="4" className="mb-3 mb-xl-0">
+              <CCol col="6" sm="6" md="6" xl="6" className="mb-3 mb-xl-0">
                 <CButtonGroup>
-                  <CButton color="success" onClick={()=>addToast('change')} >Players list</CButton>
-                  <CButton color="danger" onClick={()=>setPlayears([])} >Clear list</CButton>
+                  <CButton color="success" onClick={()=>addToast('change')} >Jucatori selectati</CButton>
+                  <CButton color="danger" onClick={()=>setPlayears([])} >Reseteaza lista</CButton>
                 </CButtonGroup>
               </CCol>
-              <CCol col="6" sm="4" md="4" xl="4" className="mb-3 mb-xl-0">
+              <CCol col="6" sm="6" md="6" xl="6" className="mb-3 mb-xl-0 text-right">
                 <CButtonGroup>
-                  <CButton color="success" onClick={showTeams} >Show teams</CButton>
-                  <CButton color="danger" onClick={() => createTeams()}>Generate teams</CButton>
+                  <CButton color="success" onClick={showTeams} >Afiseaza echipele</CButton>
+                  <CButton color="danger" onClick={() => createTeams()}>Genereaza echipele</CButton>
                 </CButtonGroup>
               </CCol>
             </CRow>
@@ -384,10 +381,10 @@ const Players = () => {
               { key: 'name', _classes: 'font-weight-bold', _style: { width: '30%'} },
               { key: 'phone', label: 'Telefon' },
               { key: 'note', label: 'Nota' },
-              { key: 'pozitiile', label: 'Post' },
+              { key: 'pozitiile', label: 'Pozitii de joc' },
               { key: 'show_details', label: '', _style: { width: '1%' }, filter: false }
             ]}
-            tableFilter
+            tableFilter={{placeholder: "nume | telefon"}}
             itemsPerPageSelect={{label: 'Jucaroti pe pagina', values:[10,20,50]}}
             onPaginationChange={(e)=>{setPerpage(e)}}
             hover
