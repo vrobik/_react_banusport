@@ -20,6 +20,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: Check Node Version
+        run: node -v && npm -v
+
       - name: Install and Build
         run: npm install && npm run build
 
