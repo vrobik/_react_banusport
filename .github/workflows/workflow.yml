@@ -30,6 +30,11 @@ jobs:
 
       - name: Install and Build
         run: npm install && npm run build
+        env:
+          REACT_APP_PRIVATE_KEY: ${{ secrets.REACT_APP_PRIVATE_KEY }}
+          REACT_APP_CLIENT_EMAIL: ${{ secrets.REACT_APP_CLIENT_EMAIL }}
+          REACT_APP_GOOGLESHEET_ID: ${{ secrets.REACT_APP_GOOGLESHEET_ID }}
+          REACT_APP_SHEET_ID: ${{ secrets.REACT_APP_SHEET_ID }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
