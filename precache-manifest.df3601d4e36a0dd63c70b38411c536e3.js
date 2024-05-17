@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7507ce4fa63b9b7ebb6c5b555ede113b",
+    "revision": "e74cb05e9b1b17b1c0c7f5ea1c603e32",
     "url": "/_react_banusport/index.html"
   },
   {
@@ -36,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/_react_banusport/static/js/4.7ac4ad5d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4b0f0af2886054d9f15f",
-    "url": "/_react_banusport/static/js/5.0720e38a.chunk.js"
+    "revision": "3667b5e313a8d7a3af5f",
+    "url": "/_react_banusport/static/js/5.e1a085b2.chunk.js"
   },
   {
     "revision": "f7033b6d8abc021b6040",
@@ -48,7 +48,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/_react_banusport/static/js/main.09cf2802.chunk.js"
   },
   {
-    "revision": "7d45cee56c23a34d0bac",
-    "url": "/_react_banusport/static/js/runtime-main.9342052e.js"
+    "revision": "7df625b3961f3a9d0a70",
+    "url": "/_react_banusport/static/js/runtime-main.effad1e3.js"
   }
 ]);
