@@ -25,7 +25,7 @@ const Players = () => {
   const [editPlayer, setEditPlayer] = useState({});
   const [playersRows, setPlayersRows] = useState([]);
   const [playersDataSheet, setPlayersDataSheet] = useState([]);
-  const [perpage, setPerpage] = useState(10);
+  const [perpage, setPerpage] = useState(50);
   const [toasts, setToasts] = useState([]);
   const {
     REACT_APP_GOOGLESHEET_ID,
@@ -214,10 +214,10 @@ const Players = () => {
             }
           }
         })
-        Object.keys(atac).map(at => atac[at].sort((e, s) => parseInt(s.note, 10) - parseInt(e.note, 10)));
-        Object.keys(mid).map(at => mid[at].sort((e, s) => parseInt(s.note, 10) - parseInt(e.note, 10)));
-        Object.keys(def).map(at => def[at].sort((e, s) => parseInt(s.note, 10) - parseInt(e.note, 10)));
-        Object.keys(goal).map(at => goal[at].sort((e, s) => parseInt(s.note, 10) - parseInt(e.note, 10)));
+        Object.keys(atac).map(at => atac[at].sort((e, s) => parseFloat(s.note) - parseFloat(e.note)));
+        Object.keys(mid).map(at => mid[at].sort((e, s) => parseFloat(s.note) - parseFloat(e.note)));
+        Object.keys(def).map(at => def[at].sort((e, s) => parseFloat(s.note) - parseFloat(e.note)));
+        Object.keys(goal).map(at => goal[at].sort((e, s) => parseFloat(s.note) - parseFloat(e.note)));
         team1 = [...atac[1].filter((f, i) => i % 2 === 0), ...mid[1].filter((f, i) => i % 2 === 0), ...def[1].filter((f, i) => i % 2 === 0), ...goal[1].filter((f, i) => i % 2 === 0)]
         team2 = [...atac[1].filter((f, i) => i % 2 !== 0), ...mid[1].filter((f, i) => i % 2 !== 0), ...def[1].filter((f, i) => i % 2 !== 0), ...goal[1].filter((f, i) => i % 2 !== 0)]
         if (team1.length !== team2.length) {
@@ -238,7 +238,7 @@ const Players = () => {
             playersData[player.id] = player;
           }
         })
-        const playersRandom = Object.values(playersData).sort((a, b) => parseInt(b.note, 10) - parseInt(a.note, 10));
+        const playersRandom = Object.values(playersData).sort((a, b) => parseFloat(b.note) - parseFloat(a.note));
         // console.log('playersRandom', playersRandom);
         playersRandom.forEach( (a, i) => {
           if( i%2 ){
@@ -249,7 +249,13 @@ const Players = () => {
         })
       }else{
         // console.log('BY RANDOM');
-        const playersRandom = players.sort(() => 0.5 - Math.random());
+        playersDataSheet.forEach(player => {
+          if (players.includes(player.id)) {
+            playersData[player.id] = player;
+          }
+        })
+        const playersRandom = Object.values(playersData).sort(() => 0.5 - Math.random());
+        // console.log('playersRandom', playersRandom);
         team1 = playersRandom.slice(0, 6);
         team2 = playersRandom.slice(6, 12);
       }
@@ -385,7 +391,7 @@ const Players = () => {
               { key: 'show_details', label: '', _style: { width: '1%' }, filter: false }
             ]}
             tableFilter={{placeholder: "nume | telefon"}}
-            itemsPerPageSelect={{label: 'Jucaroti pe pagina', values:[10,20,50]}}
+            itemsPerPageSelect={{label: 'Jucaroti pe pagina', values:[10,20,50,100]}}
             onPaginationChange={(e)=>{setPerpage(e)}}
             hover
             striped
@@ -520,33 +526,34 @@ const Players = () => {
         onClose={setModal}
       >
         <CModalHeader closeButton>
-          <CModalTitle>Modal title</CModalTitle>
+          <CModalTitle>Echipe</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          {(teams.length < 1) ? 'No teams' :
-            <CRow>
+          {(teams.length < 1)
+            ? 'No teams'
+            : <CRow>
               <CCol col="6" className="bg-info py-3">
                 {
                   teams[0].map((pl, i) => {
-                    scoreTeam1 += parseInt(pl.note, 10);
+                    scoreTeam1 += parseFloat(pl.note);
                     return <p
                       key={pl.id}>{`${i + 1}: `}<b>{`${pl.name}`}</b> : {getPositions(pl.pozitiile.split('.')[0])} : {pl.note}
                     </p>;
                   })
                 }
-                <h3>Suma: {scoreTeam1}</h3>
+                <h3>Suma: {scoreTeam1.toFixed(2)}</h3>
                 <h5>Media: {(scoreTeam1 / 6).toFixed(2)}</h5>
               </CCol>
               <CCol col="6" className="bg-warning py-3">
                 {
                   teams[1].map((pl, i) => {
-                    scoreTeam2 += parseInt(pl.note, 10);
+                    scoreTeam2 += parseFloat(pl.note);
                     return <p
                       key={pl.id}>{`${i + 1}: `}<b>{`${pl.name}`}</b> : {getPositions(pl.pozitiile.split('.')[0])} : {pl.note}
                     </p>;
                   })
                 }
-                <h4>Suma: {scoreTeam2}</h4>
+                <h4>Suma: {scoreTeam2.toFixed(2)}</h4>
                 <h5>Media: {(scoreTeam2 / 6).toFixed(2)}</h5>
               </CCol>
             </CRow>
@@ -554,8 +561,9 @@ const Players = () => {
         </CModalBody>
         <CModalFooter>
           <CButtonGroup>
-            <CButton onClick={() => createTeams('position')} color="success">Teams by Position</CButton>{' '}
-            <CButton onClick={() => createTeams('top')} color="danger">Teams by Top</CButton>
+            <CButton onClick={() => createTeams('position')} color="success">by Position</CButton>{' '}
+            <CButton onClick={() => createTeams('top')} color="warning">by Top</CButton>
+            <CButton onClick={() => createTeams('random')} color="danger">by Random</CButton>
           </CButtonGroup>
           <CButton
             color="secondary"
