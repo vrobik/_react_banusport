@@ -25,7 +25,7 @@ const Players = () => {
   const [editPlayer, setEditPlayer] = useState({});
   const [playersRows, setPlayersRows] = useState([]);
   const [playersDataSheet, setPlayersDataSheet] = useState([]);
-  const [perpage, setPerpage] = useState(50);
+  const [perpage, setPerpage] = useState(20);
   const [toasts, setToasts] = useState([]);
   const {
     REACT_APP_GOOGLESHEET_ID,
@@ -391,7 +391,7 @@ const Players = () => {
               { key: 'show_details', label: '', _style: { width: '1%' }, filter: false }
             ]}
             tableFilter={{placeholder: "nume | telefon"}}
-            itemsPerPageSelect={{label: 'Jucaroti pe pagina', values:[10,20,50,100]}}
+            itemsPerPageSelect={{label: 'Jucaroti pe pagina', values:[20,50,100]}}
             onPaginationChange={(e)=>{setPerpage(e)}}
             hover
             striped
